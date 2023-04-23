@@ -1,5 +1,16 @@
 export type TCoinId = string | undefined
 
+export interface IChartParams {
+  id: TCoinId
+  days: string
+}
+
+export interface IChartData {
+  prices: number[][]
+  market_caps: number[][]
+  total_volumes: number[][]
+}
+
 export interface ICoin {
   id: string
   symbol: string

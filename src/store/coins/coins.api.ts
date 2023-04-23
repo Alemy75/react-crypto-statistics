@@ -1,8 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-import { ICoin, TCoinId } from "../../models/coins.model"
+import { IChartData, IChartParams, ICoin, TCoinId } from "../../models/coins.model"
 
 export const coinsApi = createApi({
 	reducerPath: 'coins/api',
+	tagTypes: ['Charts'],
 	baseQuery: fetchBaseQuery({
 		baseUrl: 'https://api.coingecko.com/api/v3/'
 	}),
@@ -18,7 +19,23 @@ export const coinsApi = createApi({
 				url: `/coins/${id}/`,
 			}),
 		}),
+		getChartData: build.query<IChartData, IChartParams>({
+			query: (ChartParams: IChartParams) => ({
+				url: `/coins/${ChartParams.id}/market_chart`,
+				params: {
+					vs_currency: 'usd',
+					days: ChartParams.days,
+					interval: 'daily',
+				},
+				providesTags: (result: []) => result
+					? [
+						...result.map(({ id }) => ({ type: 'Charts' as const, id })),
+						{ type: 'Charts', id: 'LIST' },
+					]
+					: [{ type: 'Charts', id: 'LIST' }],
+			}),
+		}),
 	})
 })
 
-export const {useGetCoinsQuery, useGetCoinQuery} = coinsApi
+export const { useGetCoinsQuery, useGetCoinQuery, useGetChartDataQuery } = coinsApi
