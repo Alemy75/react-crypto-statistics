@@ -1,9 +1,15 @@
 export type TCoinId = string | undefined
 
 export interface IChartParams {
-  id: TCoinId
-  days: string
+  readonly id: TCoinId
+  readonly days: string
 }
+
+export interface ICoinChart {
+	readonly id: TCoinId
+  readonly days: number
+}
+
 
 export interface IChartData {
   prices: number[][]

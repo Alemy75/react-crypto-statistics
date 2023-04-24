@@ -7,7 +7,7 @@ const HomeTable = () => {
 	const { data: coins, isSuccess, isFetching, isError } = useGetCoinsQuery({
 		refetchOnFocus: true,
 	})
-
+	
 	return (
 		<>
 			<div className={s["mobile-table"]}>
@@ -52,7 +52,7 @@ const HomeTable = () => {
 				</table>
 
 			</div>
-			{isFetching && <h1>Загрузка...</h1>}
+			{isFetching && <h1 className='w-[100%] mt-[2em] text-center opacity-20'>...</h1>}
 			{isError && <h1>Возникла ошибка</h1>}
 		</>
 	)

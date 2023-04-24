@@ -1,6 +1,7 @@
 .chart {
-	width: 50%;
-	@media(max-width: 1280px) {
-        width: 100%;
-    }
+	padding: 1em;
+	padding-top: 0;
+	border: 1px solid #4f8df450;
+	background-color: #4f8df405;
+	margin-top: 1em;
 }
