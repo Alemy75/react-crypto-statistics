@@ -1,34 +1,32 @@
 import { useParams } from 'react-router-dom'
 import { useGetChartDataQuery, useGetCoinQuery } from '../../store/coins/coins.api'
 import CoinChart from '../../components/CoinChart/CoinChart'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
+import { useActions, useAppSelector } from '../../hooks/hooks'
 
 const Coinpage = () => {
 	const { id } = useParams()
 
 	const [days, setDays] = useState(14)
 
+	const {median, variance} = useAppSelector(state => state.coins)
+
 	const { data, isSuccess } = useGetCoinQuery(id)
 
 	const { data: chartData, isSuccess: isChartSuccess } = useGetChartDataQuery({ id, days: days + '', })
+
+
+	const {countMedian, countVariance} = useActions()
 
 	function onButtonClick(days: number) {
 		return () => setDays(days)
 	}
 
-	const countMediana = () => {
-		if (isChartSuccess) {
-			let dataArray = chartData.prices.map(item => item[1])
-			let sum: number = 0
-			for (let item of dataArray) {
-				sum += item
-			}
-			return (sum / dataArray.length).toFixed(2)
-		}
-	}
-
-	const mediana = countMediana()
+	let dataArray = isChartSuccess ? chartData.prices.map(item => item[1]) : []
+	
+	countMedian(dataArray)
+	countVariance(dataArray)
 
 	return (
 		<div className='container mx-auto '>
@@ -63,7 +61,7 @@ const Coinpage = () => {
 							</div>
 							<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 								<h3>Последнее обновление:</h3>
-								<span className='font-bold font-blue'>{data.last_updated}</span>
+								<span className='font-bold font-blue'>{new Date(data.last_updated).toLocaleString()}</span>
 							</div>
 						</section>
 					}
@@ -71,11 +69,7 @@ const Coinpage = () => {
 						<h2 className='mb-[2em]'>Данные первичного анализа</h2>
 						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 							<h3>Дисперсия:</h3>
-							<span>0.6</span>
-						</div>
-						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-							<h3>Медиана:</h3>
-							<span>0.6</span>
+							<span className='font-bold font-blue'>{variance.toFixed(2)}</span>
 						</div>
 						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 							<h3>Нормальное отклонение:</h3>
@@ -83,7 +77,7 @@ const Coinpage = () => {
 						</div>
 						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 							<h3>Медиана:</h3>
-							<span className='font-bold font-blue'>{mediana}</span>
+							<span className='font-bold font-blue'>{median.toFixed(2)}</span>
 						</div>
 					</section>
 				</div>
