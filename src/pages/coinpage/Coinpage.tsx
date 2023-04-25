@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetCoinQuery } from '../../store/coins/coins.api'
+import { useGetChartDataQuery, useGetCoinQuery } from '../../store/coins/coins.api'
 import CoinChart from '../../components/CoinChart/CoinChart'
 import { useState } from 'react'
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
@@ -11,15 +11,35 @@ const Coinpage = () => {
 
 	const { data, isSuccess } = useGetCoinQuery(id)
 
-	function onButtonClick (days: number) {
+	const { data: chartData, isSuccess: isChartSuccess } = useGetChartDataQuery({ id, days: days + '', })
+
+	function onButtonClick(days: number) {
 		return () => setDays(days)
 	}
+
+	const countMediana = () => {
+		if (isChartSuccess) {
+			let dataArray = chartData.prices.map(item => item[1])
+			let sum: number = 0
+			for (let item of dataArray) {
+				sum += item
+			}
+			return (sum / dataArray.length).toFixed(2)
+		}
+	}
+
+	const mediana = countMediana()
 
 	return (
 		<div className='container mx-auto '>
 			<div className="mt-[4em] w-[100%] flex justify-between">
 				<div className="w-[49%]">
-					{isSuccess && <h2 className=''>{data.name}</h2>}
+					{isSuccess && (
+						<div className='flex'>
+							<img className='w-[1.5em] h-[1.5em] mr-4' src={data.image.small} alt='' />
+							<h2 className=''>{data.name}</h2>
+						</div>
+					)}
 					<BreadCrumbs name={data?.name} />
 					<CoinChart id={id} days={days} />
 					<div className='flex justify-between'>
@@ -31,6 +51,24 @@ const Coinpage = () => {
 				</div>
 				<div className="w-[49%]">
 					<h2>Данные первичного анализа</h2>
+					<section className='mt-[2em]'>
+						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+							<h3>Дисперсия:</h3>
+							<span>0.6</span>
+						</div>
+						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+							<h3>Медиана:</h3>
+							<span>0.6</span>
+						</div>
+						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+							<h3>Нормальное отклонение:</h3>
+							<span>0.6</span>
+						</div>
+						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+							<h3>Медиана:</h3>
+							<span className='font-bold font-blue'>{mediana}</span>
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
