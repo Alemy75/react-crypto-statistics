@@ -53,7 +53,7 @@ const HomeTable = () => {
 
 			</div>
 			{isFetching && <h1 className='w-[100%] mt-[2em] text-center opacity-20'>...</h1>}
-			{isError && <h1>Возникла ошибка</h1>}
+			{isError && <div className='w-[50%] mt-[2em] mx-auto text-center opacity-50'>Возникла ошибка. Сервис, предоставиляющий API заблокировал доступ к данным. Ожидайте в течении 5-10 минут до возобновления доступа.</div>}
 		</>
 	)
 }

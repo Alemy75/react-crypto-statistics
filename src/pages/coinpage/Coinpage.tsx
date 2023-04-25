@@ -50,8 +50,25 @@ const Coinpage = () => {
 					</div>
 				</div>
 				<div className="w-[49%]">
-					<h2>Данные первичного анализа</h2>
-					<section className='mt-[2em]'>
+					{isSuccess &&
+						<section className='mb-[2em]'>
+							<h2 className='mb-[2em]'>О монете</h2>
+							<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+								<h3>Наименование:</h3>
+								<span className='font-bold font-blue'>{data.name}</span>
+							</div>
+							<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+								<h3>Цена на бирже в данный момент:</h3>
+								<span className='font-bold font-blue'>{data.market_data.current_price.usd} $</span>
+							</div>
+							<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+								<h3>Последнее обновление:</h3>
+								<span className='font-bold font-blue'>{data.last_updated}</span>
+							</div>
+						</section>
+					}
+					<section>
+						<h2 className='mb-[2em]'>Данные первичного анализа</h2>
 						<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 							<h3>Дисперсия:</h3>
 							<span>0.6</span>
