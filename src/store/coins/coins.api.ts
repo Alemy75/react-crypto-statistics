@@ -25,7 +25,7 @@ export const coinsApi = createApi({
 				params: {
 					vs_currency: 'usd',
 					days: ChartParams.days,
-					interval: 'daily',
+					// interval: 'daily',
 				},
 				providesTags: (result: []) => result
 					? [

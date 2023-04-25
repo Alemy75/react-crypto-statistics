@@ -26,7 +26,7 @@ const Coinpage = () => {
 						<button onClick={onButtonClick(14)} className='button'>За 14 дней</button>
 						<button onClick={onButtonClick(30)} className='button'>За 30 дней</button>
 						<button onClick={onButtonClick(50)} className='button'>За 50 дней</button>
-						<button onClick={onButtonClick(100)} className='button mr-0'>За 100 дней</button>
+						<button onClick={onButtonClick(1)} className='button mr-0'>За 1 день</button>
 					</div>
 				</div>
 				<div className="w-[49%]">

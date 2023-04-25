@@ -12,4 +12,9 @@ export const options = {
 	backgroundColor: '#4f8df430',
 	fill: true,
 	borderWidth: 1,
+	elements: {
+		point:{
+			radius: 0
+		}
+	}
 };

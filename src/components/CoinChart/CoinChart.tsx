@@ -23,7 +23,7 @@ ChartJS.register(CategoryScale,LinearScale,
 	Legend
 );
 
-const CoinChart: React.FC<ICoinChart> = ({ id, days}) => {
+const CoinChart: React.FC<ICoinChart> = ({id, days}) => {
 
 	const { data, isSuccess } = useGetChartDataQuery({id,days: days + '',})
 
