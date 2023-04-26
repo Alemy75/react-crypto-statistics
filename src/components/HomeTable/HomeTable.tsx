@@ -1,13 +1,14 @@
 import s from './HomeTable.module.scss';
 import { useGetCoinsQuery } from "../../store/coins/coins.api"
 import { Link } from 'react-router-dom';
+import { Audio } from 'react-loader-spinner'
 
 const HomeTable = () => {
 
 	const { data: coins, isSuccess, isFetching, isError } = useGetCoinsQuery({
 		refetchOnFocus: true,
 	})
-	
+
 	return (
 		<>
 			<div className={s["mobile-table"]}>
@@ -42,8 +43,8 @@ const HomeTable = () => {
 									<td className={coin.market_data.price_change_percentage_24h_in_currency.usd > 0 ? s.up : s.low}>
 										{coin.market_data.price_change_percentage_24h_in_currency.usd.toFixed(2)}% {coin.market_data.price_change_percentage_24h_in_currency.usd > 0 ? "⏶" : "⏷"}
 									</td>
-									<td>{coin.market_data.total_volume.usd} $</td>
-									<td>{coin.market_data.market_cap.usd} $</td>
+									<td>{coin.market_data.total_volume.usd.toLocaleString('ru')} $</td>
+									<td>{coin.market_data.market_cap.usd.toLocaleString('ru')} $</td>
 								</tr>
 							))
 						}
@@ -52,7 +53,17 @@ const HomeTable = () => {
 				</table>
 
 			</div>
-			{isFetching && <h1 className='w-[100%] mt-[2em] text-center opacity-20'>...</h1>}
+			{isFetching &&
+				<div className='w-[80px] mt-[10em] opacity-5 mx-auto'>
+					<Audio
+						height="80"
+						width="80"
+						color="grey"
+						ariaLabel="loading"
+
+					/>
+				</div>
+			}
 			{isError && <div className='w-[50%] mt-[2em] mx-auto text-center opacity-50'>Возникла ошибка. Сервис, предоставиляющий API заблокировал доступ к данным. Ожидайте в течении 5-10 минут до возобновления доступа.</div>}
 		</>
 	)

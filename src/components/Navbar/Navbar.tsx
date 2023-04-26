@@ -1,3 +1,4 @@
+import Cryptiger from '../icons/Cryptiger'
 import styles from './Navbar.module.scss'
 
 const Navbar = () => {
@@ -5,7 +6,7 @@ const Navbar = () => {
 		<div className={styles.navbar}>
 			<div className="container mx-auto">
 				<div className={styles.wrap}>
-					<h1>Crypton</h1>
+					<span>Crypt<Cryptiger/></span>
 				</div>
 			</div>
 		</div>

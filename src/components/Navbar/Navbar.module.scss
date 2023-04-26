@@ -4,9 +4,9 @@
 	& .wrap {
 		height: 80px;
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
-		& h1 {
+		& span {
+			font-size: 2rem;
 			color: white;
 		}
 	}
