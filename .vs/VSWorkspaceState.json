@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\hooks",
+    "\\src\\models",
+    "\\src\\pages",
+    "\\src\\pages\\coinpage",
+    "\\src\\pages\\homepage",
+    "\\src\\store",
+    "\\src\\store\\coins"
+  ],
+  "SelectedNode": "\\src\\store\\coins\\coins.api.ts",
+  "PreviewInSolutionExplorer": false
+}

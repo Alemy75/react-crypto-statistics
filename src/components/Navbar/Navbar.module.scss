@@ -1,13 +1,28 @@
 .navbar {
 	background-color: #4f8df4;
 	height: 80px;
+
 	& .wrap {
 		height: 80px;
 		display: flex;
 		align-items: center;
-		& span {
+		justify-content: space-between;
+
+		& h1 {
 			font-size: 2rem;
 			color: white;
+		}
+
+		& span {
+			color: white;
+
+			& a {
+				margin-left: 1rem;
+
+				&:hover {
+					color: #1a1a1a;
+				}
+			}
 		}
 	}
 }

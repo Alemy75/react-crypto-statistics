@@ -3,11 +3,11 @@ import { bindActionCreators } from "@reduxjs/toolkit"
 import { coinsAction } from './../store/coins/coins.slice'
 import { RootState } from "../store";
 
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
-
 const actions = {
 	...coinsAction
 }
+
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
 export const useActions = () => {
 	const dispatch = useDispatch()
