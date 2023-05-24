@@ -9,7 +9,7 @@ const Navbar = () => {
 					<h1 className='font-extralight'>крипто</h1>
 					<span>
 						<Link to='/'>Главная</Link>
-						<Link to='/'>Избранное</Link>
+						<Link to='/favourites'>Избранное</Link>
 						<Link to='/'>Войти</Link>
 					</span>
 				</div>

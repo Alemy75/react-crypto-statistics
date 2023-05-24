@@ -4,14 +4,15 @@ interface IProps {
 	name: string
 	current_price: number
 	last_updated: string
-	median: number
+	mean: number
 	min: number
 	max: number
 	variance: number
 	days: number
+	median: number
 }
 
-const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, median, min, max, variance, days }) => {
+const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean, min, max, variance, days, median }) => {
 	return (
 		<section className='my-8'>
 			<h2>О монете</h2>
@@ -32,10 +33,18 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, media
 					</div>
 				</li>
 				<li>
-					<h3 className='mb-4 mt-8 pb-[0.5em] font-bold'>Точки изменения цены <span className='font-blue'>за последние {days} дней</span>:</h3>
+					<h3 className='mb-4 mt-6 pb-[0.5em] font-bold'>Первичная статистика <span className='font-blue'>за последние {days} дней</span>:</h3>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Среднее значение за период:</h3>
-						<span className='font-bold font-blue'>{median} $</span>
+						<h3>Дисперсия:</h3>
+						<span className='font-bold font-blue'>{variance.toFixed(6)}</span>
+					</div>
+					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+						<h3>Нормальное отклонение:</h3>
+						<span className='font-bold font-blue'>{Math.sqrt(variance).toFixed(6)}</span>
+					</div>
+					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
+						<h3>Математическое ожидание за период:</h3>
+						<span className='font-bold font-blue'>{mean} $</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Минимальное значение за период:</h3>
@@ -45,16 +54,9 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, media
 						<h3>Максимально значение за период:</h3>
 						<span className='font-bold font-blue'>{max} $</span>
 					</div>
-				</li>
-				<li>
-					<h3 className='mb-4 mt-6 pb-[0.5em] font-bold'>Первичная статистика <span className='font-blue'>за последние {days} дней</span>:</h3>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Дисперсия:</h3>
-						<span className='font-bold font-blue'>{variance.toFixed(6)}</span>
-					</div>
-					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Нормальное отклонение:</h3>
-						<span className='font-bold font-blue'>{Math.sqrt(variance).toFixed(6)}</span>
+						<h3>Медиана за период:</h3>
+						<span className='font-bold font-blue'>{median} $</span>
 					</div>
 				</li>
 			</ul>

@@ -1,58 +1,40 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { Utils } from '../../utils/coin.utils'
+
 
 export interface coinsSlice {
-    median: number
+    mean: number
     variance: number
     min: number
     max: number
+    median: number
 }
 
 const initialState: coinsSlice = {
-    median: 0,
+    mean: 0,
     variance: 0,
     min: 0,
-    max: 0
+    max: 0,
+    median: 0
 }
 
 export const coinSlice = createSlice({
     name: 'coin',
     initialState,
     reducers: {
-        countMedian(state, action: PayloadAction<number[]>) {
-            let sum: number = 0
-            for (let item of action.payload) {
-                sum += item
-            }
-            state.median = (sum / action.payload.length)
-        },
-        countVariance(state, action: PayloadAction<number[]>) {
-            const n = action.payload.length;
-            const mean = action.payload.reduce((acc, val) => acc + val, 0) / n;
-            const deviations = action.payload.map(val => val - mean);
-            const squaredDeviations = deviations.map(val => val ** 2);
-            const variance = squaredDeviations.reduce((acc, val) => acc + val, 0) / n;
-            state.variance = variance
-        },
-        findMinMax(state, action: PayloadAction<number[]>) {
-            let min = action.payload[0];
-            let max = action.payload[0];
-            
-            for(let i = 1; i < action.payload.length; i++) {
-              if(action.payload[i] < min) {
-                min = action.payload[i];
-              }
-              if(action.payload[i] > max) {
-                max =action.payload[i];
-              }
-            }
-            state.min = min
+        calculateStatistics(state, action: PayloadAction<number[]>) {
+            const [min, max] = Utils.findMinMax(action.payload)
             state.max = max
+            state.min = min
+            state.mean = Utils.countMean(action.payload)
+            state.variance = Utils.countVariance(action.payload)
+            state.median = Utils.countMedian(action.payload)          
         }
     },
 })
 
-// Action creators are generated for each case reducer function
+// Action creators создаются для каждого метода редьюсера
 export const coinsAction = coinSlice.actions
 
 export default coinSlice.reducer

@@ -14,7 +14,7 @@ export const options = {
 	borderWidth: 1,
 	elements: {
 		point:{
-			radius: 0
+			radius: 4
 		}
 	}
 };
