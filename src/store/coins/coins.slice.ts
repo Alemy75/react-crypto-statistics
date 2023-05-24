@@ -9,6 +9,7 @@ export interface coinsSlice {
     min: number
     max: number
     median: number
+    forecastArray: number[]
 }
 
 const initialState: coinsSlice = {
@@ -16,7 +17,8 @@ const initialState: coinsSlice = {
     variance: 0,
     min: 0,
     max: 0,
-    median: 0
+    median: 0,
+    forecastArray: []
 }
 
 export const coinSlice = createSlice({
@@ -29,7 +31,7 @@ export const coinSlice = createSlice({
             state.min = min
             state.mean = Utils.countMean(action.payload)
             state.variance = Utils.countVariance(action.payload)
-            state.median = Utils.countMedian(action.payload)          
+            state.median = Utils.countMedian(action.payload)
         }
     },
 })

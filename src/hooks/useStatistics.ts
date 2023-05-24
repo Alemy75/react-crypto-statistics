@@ -9,8 +9,9 @@ const useStatistics = (id: TCoinId, days:number) => {
 	let dataArray = isChartSuccess ? chartData.prices.map(item => item[1]) : []
 	
 	const { calculateStatistics } = useActions()
-	
+
 	calculateStatistics(dataArray)
+	
 }
 
 export default useStatistics

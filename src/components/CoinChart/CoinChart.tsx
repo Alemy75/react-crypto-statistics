@@ -14,6 +14,7 @@ import {
 	Tooltip,
 	Legend,
 } from 'chart.js';
+import { Utils } from "../../utils/coin.utils";
 
 ChartJS.register(CategoryScale,LinearScale,
 	PointElement,
@@ -23,7 +24,7 @@ ChartJS.register(CategoryScale,LinearScale,
 	Legend
 );
 
-const CoinChart: React.FC<ICoinChart> = ({id, days}) => {
+const CoinChart: React.FC<ICoinChart> = ({id, days, forecastArray}) => {
 
 	const { data, isSuccess } = useGetChartDataQuery({id,days: days + '',})
 
@@ -33,6 +34,18 @@ const CoinChart: React.FC<ICoinChart> = ({id, days}) => {
 			{
 				label: `Изменение цены за ${days} дней`,
 				data: isSuccess ? data.prices.map(item => item[1]) : [],
+			},
+			{
+				label: `Прогнозирование`,
+				data: isSuccess ? Utils.exponentialSmoothing(data.prices.map(item => item[1]), 0.2) : [],
+				borderColor: '#D62676',
+				backgroundColor: '#D6267650',			
+			},
+			{
+				label: `Прямая изменения`,
+				data: isSuccess ? Utils.calculateLineGraphData(data.prices.map(item => item[1])) : [],
+				borderColor: '#6DA584',
+				backgroundColor: '#6DA58450',
 			},
 		]
 	}

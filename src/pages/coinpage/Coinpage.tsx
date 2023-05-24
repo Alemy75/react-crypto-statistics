@@ -16,7 +16,7 @@ const Coinpage = () => {
 
 	useStatistics(id, days)
 
-	const { mean, variance, min, max, median } = useAppSelector(state => state.coins)
+	const { mean, variance, min, max, median, forecastArray } = useAppSelector(state => state.coins)
 	const { data, isSuccess, isFetching } = useGetCoinQuery(id)
 
 	return (
@@ -34,7 +34,7 @@ const Coinpage = () => {
 						</button>
 					</div>
 					<BreadCrumbs name={data?.name} />
-					<CoinChart id={id} days={days} />
+					<CoinChart id={id} days={days} forecastArray={forecastArray}/>
 					<ChartButtons onClick={setDays} />
 					<Statistics
 						name={data.name}

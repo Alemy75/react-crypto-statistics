@@ -30,11 +30,17 @@
     font-size: 0.7em;
     background: #4f8df420;
     border: 1px solid #4f8df450;
+    outline: 3px solid #a5dbff00;
     &:hover {
         
         cursor: pointer;
         outline: 3px solid #a5dbff80;
     }
+    transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
 }
 
 a, .a {

@@ -10,11 +10,10 @@ export const options = {
 	},
 	borderColor: '#4f8df4',
 	backgroundColor: '#4f8df430',
-	fill: true,
 	borderWidth: 1,
 	elements: {
 		point:{
-			radius: 4
+			radius: 0
 		}
 	}
 };

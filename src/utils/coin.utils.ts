@@ -43,5 +43,25 @@ export const Utils = {
 			// Если количество элементов в массиве нечетное, возвращаем средний элемент
 			return sortedNumbers[middleIndex];
 		}
+	},
+	exponentialSmoothing(data: number[], alpha: number) {
+		let smoothedData = [data[0]]; // Первое значение остается без изменений
+		for (let i = 1; i < data.length; i++) {
+			let smoothedValue = alpha * data[i] + (1 - alpha) * smoothedData[i - 1];
+			smoothedData.push(smoothedValue);
+		}
+
+		return smoothedData;
+	},
+	calculateLineGraphData(inputArray: number[]) {
+		const startPoint = inputArray[0];
+		const endPoint = inputArray[inputArray.length - 1];
+		const slope = (endPoint - startPoint) / (inputArray.length - 1);
+
+		const yValues = inputArray.map((value, index) => {
+			return startPoint + slope * index;
+		});
+
+		return yValues;
 	}
 }

@@ -36,11 +36,11 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 					<h3 className='mb-4 mt-6 pb-[0.5em] font-bold'>Первичная статистика <span className='font-blue'>за последние {days} дней</span>:</h3>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Дисперсия:</h3>
-						<span className='font-bold font-blue'>{variance.toFixed(6)}</span>
+						<span className='font-bold font-blue'>{variance}</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Нормальное отклонение:</h3>
-						<span className='font-bold font-blue'>{Math.sqrt(variance).toFixed(6)}</span>
+						<span className='font-bold font-blue'>{Math.sqrt(variance)}</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Математическое ожидание за период:</h3>

@@ -1,5 +1,4 @@
 import HomeTable from "../../components/HomeTable/HomeTable"
-import Navbar from "../../components/Navbar/Navbar"
 
 const Homepage = () => {
 
