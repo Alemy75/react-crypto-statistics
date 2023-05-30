@@ -8,15 +8,14 @@ import { Audio } from 'react-loader-spinner'
 import useStatistics from '../../hooks/useStatistics'
 import ChartButtons from './../../components/ChartButtons/ChartButtons';
 import Statistics from '../../components/Statistics/Statistics'
-import Fav from '../../components/Icons/Fav'
 
 const Coinpage = () => {
 	const { id } = useParams()
-	const [days, setDays] = useState(14)
+	const [days, setDays] = useState(100)
 
 	useStatistics(id, days)
 
-	const { mean, variance, min, max, median, forecastArray } = useAppSelector(state => state.coins)
+	const { mean, variance, min, max, median} = useAppSelector(state => state.coins)
 	const { data, isSuccess, isFetching } = useGetCoinQuery(id)
 
 	return (
@@ -29,12 +28,11 @@ const Coinpage = () => {
 							<h2 className=''>{data.name}</h2>
 						</div>
 						<button className='flex	'>
-							<span className='mr-2'>В избранное:</span>
-							<Fav/>						
+							<span className='mr-2' onClick={() => window.print()}>Печать</span>						
 						</button>
 					</div>
 					<BreadCrumbs name={data?.name} />
-					<CoinChart id={id} days={days} forecastArray={forecastArray}/>
+					<CoinChart id={id} days={days} />
 					<ChartButtons onClick={setDays} />
 					<Statistics
 						name={data.name}

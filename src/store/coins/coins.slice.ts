@@ -9,7 +9,10 @@ export interface coinsSlice {
     min: number
     max: number
     median: number
-    forecastArray: number[]
+    forecastValue: number
+    absoluteGrowth: number
+    growthTemp: number
+    pregrowthTemp: number
 }
 
 const initialState: coinsSlice = {
@@ -18,7 +21,10 @@ const initialState: coinsSlice = {
     min: 0,
     max: 0,
     median: 0,
-    forecastArray: []
+    forecastValue: 0,
+    absoluteGrowth: 0,
+    growthTemp: 0,
+    pregrowthTemp: 0,
 }
 
 export const coinSlice = createSlice({
@@ -32,6 +38,11 @@ export const coinSlice = createSlice({
             state.mean = Utils.countMean(action.payload)
             state.variance = Utils.countVariance(action.payload)
             state.median = Utils.countMedian(action.payload)
+            state.absoluteGrowth = Utils.calculateAbsoluteGrowth(action.payload)
+            state.growthTemp = Utils.calculateGrowthRate(action.payload)
+        },
+        setForecastValue(state, action: PayloadAction<number>) {
+            state.forecastValue = action.payload
         }
     },
 })

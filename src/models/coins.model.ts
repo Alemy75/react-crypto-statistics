@@ -8,7 +8,6 @@ export interface IChartParams {
 export interface ICoinChart {
 	readonly id: TCoinId
   readonly days: number
-  readonly forecastArray: number[]
 }
 
 

@@ -15,6 +15,7 @@ import {
 	Legend,
 } from 'chart.js';
 import { Utils } from "../../utils/coin.utils";
+import { useAppSelector } from "../../hooks/hooks";
 
 ChartJS.register(CategoryScale,LinearScale,
 	PointElement,
@@ -24,12 +25,18 @@ ChartJS.register(CategoryScale,LinearScale,
 	Legend
 );
 
-const CoinChart: React.FC<ICoinChart> = ({id, days, forecastArray}) => {
+const CoinChart: React.FC<ICoinChart> = ({id, days}) => {
+
+	const { forecastValue } = useAppSelector(store => store.coins)
 
 	const { data, isSuccess } = useGetChartDataQuery({id,days: days + '',})
 
+	let forecastDateArray = Utils.createForecastDatesArray(forecastValue)
+
+	let forecastArray = isSuccess ? [...data.prices.map(item => item[1]), ...Utils.linearRegressionForecast(data.prices.map(item => item[1]), forecastValue)] : []
+
 	let chartData = {
-		labels: isSuccess ? data.prices.map((item, index) => item && index).reverse() : [],
+		labels: isSuccess ? [...Utils.createReverseDateArray(data.prices.map((item, index) => item && index)), ...forecastDateArray] : [],
 		datasets: [
 			{
 				label: `Изменение цены за ${days} дней`,
@@ -37,15 +44,15 @@ const CoinChart: React.FC<ICoinChart> = ({id, days, forecastArray}) => {
 			},
 			{
 				label: `Прогнозирование`,
-				data: isSuccess ? Utils.exponentialSmoothing(data.prices.map(item => item[1]), 0.2) : [],
+				data: forecastArray,
 				borderColor: '#D62676',
 				backgroundColor: '#D6267650',			
 			},
 			{
-				label: `Прямая изменения`,
-				data: isSuccess ? Utils.calculateLineGraphData(data.prices.map(item => item[1])) : [],
-				borderColor: '#6DA584',
-				backgroundColor: '#6DA58450',
+				label: `Линия тренда`,
+				data: isSuccess ? Utils.calculateTrendLine(data.prices.map(item => item[1])) : [],
+				borderColor: '#6DA58440',
+				backgroundColor: '#6DA58410',
 			},
 		]
 	}
