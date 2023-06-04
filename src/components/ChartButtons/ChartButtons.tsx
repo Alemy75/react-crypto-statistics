@@ -17,7 +17,7 @@ const ChartButtons: React.FC<IChartButtonProps> = ({ onClick }) => {
 			<div className='flex w-[100%] justify-between items-center'>
 				<div>
 					<button className='mr-4 text-center' onClick={() => setForecastValue(Number(inputValue))}>Спрогнозировать на:</button>
-					<input className='px-4 border-b mr-4 font-blue' type="number" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
+					<input className='px-4 border-b mr-4 font-blue border-b-slate-100' type="number" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
 				</div>
 				<div>
 					<span onClick={() => isTrend()} className='mr-4 cursor-pointer'>Линия тренда: <span className='font-blue hover:text-gray-500'>{trendStatus ? 'Вкл' : 'Выкл'}</span></span>

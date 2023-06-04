@@ -35,7 +35,7 @@ const CoinChart: React.FC<ICoinChart> = ({ id, days }) => {
 
 	let forecastDateArray = Utils.createForecastDatesArray(forecastValue)
 
-	let forecastArray = [...roundedData, ...Utils.linearRegressionForecast(roundedData, forecastValue)]
+	let forecastArray = [...roundedData.map((el, index) => index !== roundedData.length - 1 ? undefined : el), ...Utils.linearRegressionForecast(roundedData, forecastValue)]
 
 	let chartData = {
 		labels: isSuccess ? [...Utils.createReverseDateArray(data.prices.map((item, index) => item && index)), ...forecastDateArray] : [],

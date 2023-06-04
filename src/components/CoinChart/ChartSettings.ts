@@ -12,8 +12,11 @@ export const options = {
 	backgroundColor: '#4f8df430',
 	borderWidth: 1,
 	elements: {
-		point:{
+		point: {
 			radius: 0
 		}
+	},
+	grid: {
+		color: "rgb(241, 245, 249)",
 	}
 };
