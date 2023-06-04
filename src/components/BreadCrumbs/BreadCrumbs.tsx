@@ -9,7 +9,7 @@ interface IBreadCrumbs {
 const BreadCrumbs: React.FC<IBreadCrumbs> = ({name}) => {
   return (
 	<span className={s.breadcrumbs}>
-		<Link to='/'>Главная</Link>
+		<Link to='/react-crypto-statistics/'>Главная</Link>
 		<span> / {name}</span>
 	</span>
   )

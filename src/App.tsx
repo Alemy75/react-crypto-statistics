@@ -10,9 +10,9 @@ function App() {
 		<>
 			<Navbar />
 			<Routes>
-				<Route path='/' element={<Homepage />} />
-				<Route path='/:id' element={<Coinpage />} />
-				<Route path='/about' element={<AboutPage/>} />
+				<Route path='/react-crypto-statistics/' element={<Homepage />} />
+				<Route path='/react-crypto-statistics/:id' element={<Coinpage />} />
+				<Route path='/react-crypto-statistics/about' element={<AboutPage/>} />
 			</Routes>
 		</>
 	)

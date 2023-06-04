@@ -8,8 +8,8 @@ const Navbar = () => {
 				<div className={styles.wrap}>
 					<h1 className='font-extralight'>CryptoCoin</h1>
 					<span>
-						<Link to='/'>Главная</Link>
-						<Link to='/about'>О разработчиках</Link>
+						<Link to='/react-crypto-statistics/'>Главная</Link>
+						<Link to='/react-crypto-statistics/about'>О разработчиках</Link>
 					</span>
 				</div>
 			</div>
