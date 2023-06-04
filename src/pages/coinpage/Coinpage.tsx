@@ -15,9 +15,10 @@ const Coinpage = () => {
 
 	useStatistics(id, days)
 
-	const { mean, variance, min, max, median} = useAppSelector(state => state.coins)
+	const { mean, variance, min, max, median, difference} = useAppSelector(state => state.coins)
 	const { data, isSuccess, isFetching } = useGetCoinQuery(id)
-
+	const [showChart, setShowChart] = useState(true)
+ 
 	return (
 		<div className='container mx-auto '>
 			{isSuccess && (
@@ -28,12 +29,19 @@ const Coinpage = () => {
 							<h2 className=''>{data.name}</h2>
 						</div>
 						<button className='flex	'>
-							<span className='mr-2' onClick={() => window.print()}>Печать</span>						
+							<span className='mr-2 hover:text-gray-500' onClick={() => setShowChart(prev => !prev)}>Включить графики</span>
+							<span className='mr-2 hover:text-gray-500' onClick={() => window.print()}>Печать</span>
 						</button>
 					</div>
 					<BreadCrumbs name={data?.name} />
-					<CoinChart id={id} days={days} />
-					<ChartButtons onClick={setDays} />
+					{
+						showChart && (
+							<>
+								<CoinChart id={id} days={days} />
+								<ChartButtons onClick={setDays} />
+							</>
+						)
+					}
 					<Statistics
 						name={data.name}
 						current_price={data.market_data.current_price.usd}
@@ -44,6 +52,7 @@ const Coinpage = () => {
 						variance={variance}
 						days={days}
 						median={median}
+						difference={difference}
 					/>
 				</div>
 			)}

@@ -1,41 +1,40 @@
 
 import { useState } from 'react';
-import { useActions } from '../../hooks/hooks';
+import { useActions, useAppSelector } from '../../hooks/hooks';
 
 interface IChartButtonProps {
 	onClick(days: number): void
 }
 
 const ChartButtons: React.FC<IChartButtonProps> = ({ onClick }) => {
-	const [inputValue, setInputValue] = useState('')
+	const [inputValue, setInputValue] = useState('10')
 
-	const { setForecastValue } = useActions()
-
-	
+	const { setForecastValue, isForecast, isTrend } = useActions()
+	const { trendStatus, forecastStatus } = useAppSelector(state => state.coins)
 
 	return (
-		<> 
-			<div className='flex justify-between w-[100%]'>
-				<div className='w-[100%]'>
-					<input className='forecast__input' type="number" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
-					<button className='button border-right-none' onClick={() => setForecastValue(Number(inputValue))}>Спрогнозировать</button>
+		<>
+			<div className='flex w-[100%] justify-between items-center'>
+				<div>
+					<button className='mr-4 text-center' onClick={() => setForecastValue(Number(inputValue))}>Спрогнозировать на:</button>
+					<input className='px-4 border-b mr-4 font-blue' type="number" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
 				</div>
-				<select onChange={(event) => onClick(Number(event.target.value))} className='button '>
-					<option value={100}>100 дней</option>
-					<option value={182}>Пол года</option>
-					<option value={365}>Год</option>
-					<option value={730}>2 года</option>
-				</select>
+				<div>
+					<span onClick={() => isTrend()} className='mr-4 cursor-pointer'>Линия тренда: <span className='font-blue hover:text-gray-500'>{trendStatus ? 'Вкл' : 'Выкл'}</span></span>
+					<span onClick={() => isForecast()} className='mr-4 cursor-pointer'>Прогнозирование: <span className='font-blue hover:text-gray-500'>{forecastStatus ? 'Вкл' : 'Выкл'}</span></span>
+					<span>
+						<span>Период: </span>
+						<select onChange={(event) => onClick(Number(event.target.value))} className='hover:text-gray-500 py-1 font-blue'>
+							<option value={100}>100 дней</option>
+							<option value={182}>Пол года</option>
+							<option value={365}>Год</option>
+							<option value={730}>2 года</option>
+						</select>
+					</span>
+				</div>
 			</div>
 		</>
 	)
 }
 
 export default ChartButtons
-
-{/* <div className='flex justify-between'>
-				<button onClick={() => onClick(100)} className='button'>За 100 дней</button>
-				<button onClick={() => onClick(182)} className='button'>За пол года</button>
-				<button onClick={() => onClick(365)} className='button'>За год</button>
-				<button onClick={() => onClick(720)} className='button mr-0'>За 2 года</button>
-			</div> */}

@@ -1,9 +1,7 @@
 import { useAppSelector } from '../../hooks/hooks'
 
-type Props = {}
-
-const GrowthTable = (props: Props) => {
-	const {absoluteGrowth, growthTemp, pregrowthTemp} = useAppSelector(state => state.coins)
+const GrowthTable = () => {
+	const {absoluteGrowth, growthTemp} = useAppSelector(state => state.coins)
 
 	return (
 		<table className="iksweb">
@@ -14,9 +12,9 @@ const GrowthTable = (props: Props) => {
 					<td>Темп прироста</td>
 				</tr>
 				<tr>
-					<td className='font-blue'>{absoluteGrowth.toFixed(2)} $</td>
-					<td style={growthTemp > 0 ? {color: 'rgb(54, 208, 102)'} : {color: '#D62676'}}>{growthTemp} %</td>
-					<td style={growthTemp - 100 > 0 ? {color: 'rgb(54, 208, 102)'} : {color: '#D62676'}}>{growthTemp - 100} %</td>
+					<td>{absoluteGrowth.toFixed(2)} $</td>
+					<td style={growthTemp > 0 ? {color: '#9cc49b'} : {color: '#D62676'}}>{growthTemp} %</td>
+					<td style={growthTemp - 100 > 0 ? {color: '#c48074'} : {color: '#D62676'}}>{growthTemp - 100} %</td>
 				</tr>
 			</tbody>
 		</table>

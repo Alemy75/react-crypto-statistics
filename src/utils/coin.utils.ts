@@ -182,14 +182,17 @@ export const Utils = {
 	calculateGrowthRate(dataArray: number[]) {
 		// Получаем текущее значение (последний элемент массива)
 		var currentValue = dataArray[dataArray.length - 1];
-	  
+
 		// Получаем предыдущее значение (первый элемент массива)
 		var previousValue = dataArray[0];
-	  
+
 		// Расчет темпа роста
 		var growthRate = ((currentValue - previousValue) / previousValue) * 100;
-	  
+
 		// Возвращаем результат
 		return growthRate;
-	  }
+	},
+	calculateDifference(dataArray: number[]) {
+		return Math.max(...dataArray) - Math.min(...dataArray)
+	}
 }

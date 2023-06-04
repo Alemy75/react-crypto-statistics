@@ -13,6 +13,9 @@ export interface coinsSlice {
     absoluteGrowth: number
     growthTemp: number
     pregrowthTemp: number
+    trendStatus: boolean
+    forecastStatus: boolean
+    difference: number
 }
 
 const initialState: coinsSlice = {
@@ -25,6 +28,10 @@ const initialState: coinsSlice = {
     absoluteGrowth: 0,
     growthTemp: 0,
     pregrowthTemp: 0,
+    trendStatus: false,
+    forecastStatus: false,
+    difference: 0
+
 }
 
 export const coinSlice = createSlice({
@@ -40,10 +47,19 @@ export const coinSlice = createSlice({
             state.median = Utils.countMedian(action.payload)
             state.absoluteGrowth = Utils.calculateAbsoluteGrowth(action.payload)
             state.growthTemp = Utils.calculateGrowthRate(action.payload)
+            state.difference = Utils.calculateDifference(action.payload)
         },
         setForecastValue(state, action: PayloadAction<number>) {
             state.forecastValue = action.payload
-        }
+            state.forecastStatus = true
+        },
+        isForecast(state) {
+            state.forecastStatus = !state.forecastStatus
+            state.forecastValue = 0
+        },
+        isTrend(state) {
+            state.trendStatus = !state.trendStatus
+        },
     },
 })
 

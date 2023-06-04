@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import s from './CoinChart.module.scss'
 import { options } from './ChartSettings';
 import { useGetChartDataQuery } from '../../store/coins/coins.api';
@@ -17,7 +17,7 @@ import {
 import { Utils } from "../../utils/coin.utils";
 import { useAppSelector } from "../../hooks/hooks";
 
-ChartJS.register(CategoryScale,LinearScale,
+ChartJS.register(CategoryScale, LinearScale,
 	PointElement,
 	LineElement,
 	Title,
@@ -25,41 +25,46 @@ ChartJS.register(CategoryScale,LinearScale,
 	Legend
 );
 
-const CoinChart: React.FC<ICoinChart> = ({id, days}) => {
+const CoinChart: React.FC<ICoinChart> = ({ id, days }) => {
 
-	const { forecastValue } = useAppSelector(store => store.coins)
+	const { forecastValue, forecastStatus, trendStatus } = useAppSelector(store => store.coins)
 
-	const { data, isSuccess } = useGetChartDataQuery({id,days: days + '',})
+	const { data, isSuccess } = useGetChartDataQuery({ id, days: days + '', })
+
+	let roundedData = isSuccess ? data.prices.map(item => item[1]) : []
 
 	let forecastDateArray = Utils.createForecastDatesArray(forecastValue)
 
-	let forecastArray = isSuccess ? [...data.prices.map(item => item[1]), ...Utils.linearRegressionForecast(data.prices.map(item => item[1]), forecastValue)] : []
+	let forecastArray = [...roundedData, ...Utils.linearRegressionForecast(roundedData, forecastValue)]
 
 	let chartData = {
 		labels: isSuccess ? [...Utils.createReverseDateArray(data.prices.map((item, index) => item && index)), ...forecastDateArray] : [],
 		datasets: [
 			{
 				label: `Изменение цены за ${days} дней`,
-				data: isSuccess ? data.prices.map(item => item[1]) : [],
-			},
-			{
-				label: `Прогнозирование`,
-				data: forecastArray,
-				borderColor: '#D62676',
-				backgroundColor: '#D6267650',			
+				data: roundedData,
 			},
 			{
 				label: `Линия тренда`,
-				data: isSuccess ? Utils.calculateTrendLine(data.prices.map(item => item[1])) : [],
+				data: trendStatus && Utils.calculateTrendLine(roundedData),
 				borderColor: '#6DA58440',
 				backgroundColor: '#6DA58410',
+			},
+			{
+				label: `Прогнозирование`,
+				data: forecastStatus && forecastArray,
+				borderColor: '#D62676',
+				backgroundColor: '#D6267650',
 			},
 		]
 	}
 
 	return (
-		<div className={s.chart}>
-			<Line data={chartData} options={options} />
+		<div>
+			<div className={s.chart}>
+				<Line data={chartData} options={options} />
+
+			</div>
 		</div>
 	);
 };
