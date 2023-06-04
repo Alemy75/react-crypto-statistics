@@ -6,7 +6,7 @@ const Navbar = () => {
 		<div className={styles.navbar}>
 			<div className="container mx-auto">
 				<div className={styles.wrap}>
-					<h1 className='font-extralight'>крипто</h1>
+					<h1 className='font-extralight'>CryptoCoin</h1>
 					<span>
 						<Link to='/'>Главная</Link>
 						<Link to='/about'>О разработчиках</Link>
