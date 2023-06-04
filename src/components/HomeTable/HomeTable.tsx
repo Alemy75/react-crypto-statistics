@@ -5,9 +5,11 @@ import { Audio } from 'react-loader-spinner'
 
 const HomeTable = () => {
 
-	const { data: coins, isSuccess, isFetching, isError } = useGetCoinsQuery({
+	const { data, isSuccess, isFetching, isError } = useGetCoinsQuery({
 		refetchOnFocus: true,
 	})
+
+	let coins = isSuccess ? data.filter(coin => coin.market_data.current_price.usd > 10 && coin.market_data.current_price.usd < 1000) : []
 
 	return (
 		<>

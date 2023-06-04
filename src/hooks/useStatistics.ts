@@ -10,7 +10,7 @@ const useStatistics = (id: TCoinId, days:number) => {
 	
 	const { calculateStatistics } = useActions()
 
-	calculateStatistics(dataArray)
+	calculateStatistics(dataArray.map(el => Math.round(el)))
 	
 }
 

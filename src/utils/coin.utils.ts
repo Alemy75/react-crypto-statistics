@@ -194,5 +194,106 @@ export const Utils = {
 	},
 	calculateDifference(dataArray: number[]) {
 		return Math.max(...dataArray) - Math.min(...dataArray)
+	},
+	countOccurrences(arr: number[]) {
+		var occurrences: any = {};
+		var result = [];
+
+		// Подсчет количества появлений каждого числа в массиве
+		for (var i = 0; i < arr.length; i++) {
+			var num = arr[i];
+			occurrences[num] = occurrences[num] ? occurrences[num] + 1 : 1;
+		}
+
+		// Создание массива массивов из чисел и их количества
+		for (var key in occurrences) {
+			if (occurrences.hasOwnProperty(key)) {
+				result.push([parseInt(key), occurrences[key]]);
+			}
+		}
+
+		return result;
+	},
+	calculateMode(arr: number[]) {
+		let occurrences = new Map();
+		let maxCount = 0;
+		let modes = [];
+
+		// Подсчет количества появлений каждого числа в массиве
+		for (let i = 0; i < arr.length; i++) {
+			let num = arr[i];
+			let count = occurrences.get(num) || 0;
+			count++;
+			occurrences.set(num, count);
+
+			// Обновление максимального количества появлений числа
+			if (count > maxCount) {
+				maxCount = count;
+			}
+		}
+
+		// Поиск чисел с максимальным количеством появлений (мод)
+		for (let [num, count] of occurrences) {
+			if (count === maxCount) {
+				modes.push(num);
+			}
+		}
+
+		return modes;
+	},
+	calculateMean(arr: number[]) {
+		let sum = arr.reduce((acc, num) => acc + num, 0);
+		return sum / arr.length;
+	},
+	calculateStandardDeviation(arr: number[]) {
+		let mean = Utils.calculateMean(arr);
+		let deviations = arr.map(num => num - mean);
+		let squaredDeviations = deviations.map(deviation => deviation ** 2);
+		let meanSquaredDeviation = Utils.calculateMean(squaredDeviations);
+		let standardDeviation = Math.sqrt(meanSquaredDeviation);
+		return standardDeviation;
+	},
+	calculateCoefficientOfVariation(arr: number[]) {
+		let mean = Utils.calculateMean(arr);
+		let standardDeviation = Utils.calculateStandardDeviation(arr);
+		let coefficientOfVariation = (standardDeviation / mean) * 100;
+		return coefficientOfVariation;
+	},
+	calculateSkewness(arr: number[]) {
+		let mean = Utils.calculateMean(arr);
+		let standardDeviation = Utils.calculateStandardDeviation(arr);
+		let deviations = arr.map(num => (num - mean) / standardDeviation);
+		let cubedDeviations = deviations.map(deviation => deviation ** 3);
+		let meanCubedDeviation = Utils.calculateMean(cubedDeviations);
+		let skewness = meanCubedDeviation;
+		return skewness;
+	},
+	determineSkewness(skewness: number) {
+		if (skewness > 0) {
+			return "Положительная асимметрия (правосторонняя)";
+		}
+		else if (skewness < 0) {
+			return "Отрицательная асимметрия (левосторонняя)";
+		} else {
+			return "Симметричное распределение";
+		}
+	},
+	calculateKurtosis(arr: number[]) {
+		let mean = Utils.calculateMean(arr);
+		let standardDeviation = Utils.calculateStandardDeviation(arr);
+		let deviations = arr.map(num => (num - mean) / standardDeviation);
+		let fourthPowerDeviations = deviations.map(deviation => deviation ** 4);
+		let meanFourthPowerDeviation = Utils.calculateMean(fourthPowerDeviations);
+		let kurtosis = meanFourthPowerDeviation;
+		return kurtosis;
+	},
+	determineKurtosisSignificance(kurtosis: number) {
+		if (kurtosis > 0) {
+			return "Тяжелые хвосты (положительный эксцесс)";
+		} else if (kurtosis < 0) {
+			return "Легкие хвосты (отрицательный эксцесс)";
+		} else {
+			return "Нормальное распределение (нулевой эксцесс)";
+		}
 	}
 }

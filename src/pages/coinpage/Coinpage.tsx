@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetCoinQuery } from '../../store/coins/coins.api'
+import { useGetChartDataQuery, useGetCoinQuery } from '../../store/coins/coins.api'
 import CoinChart from '../../components/CoinChart/CoinChart'
 import { useState } from 'react'
 import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
@@ -8,6 +8,7 @@ import { Audio } from 'react-loader-spinner'
 import useStatistics from '../../hooks/useStatistics'
 import ChartButtons from './../../components/ChartButtons/ChartButtons';
 import Statistics from '../../components/Statistics/Statistics'
+import { Utils } from '../../utils/coin.utils'
 
 const Coinpage = () => {
 	const { id } = useParams()
@@ -18,7 +19,15 @@ const Coinpage = () => {
 	const { mean, variance, min, max, median, difference} = useAppSelector(state => state.coins)
 	const { data, isSuccess, isFetching } = useGetCoinQuery(id)
 	const [showChart, setShowChart] = useState(true)
- 
+	
+
+
+	// Для Bar
+	const { data: barChartData, isSuccess: isBarChartSuccess } = useGetChartDataQuery({ id, days: days + '', })
+	let roundedData = isBarChartSuccess ? barChartData.prices.map(item => Math.round(item[1])) : []
+	let finalData = Utils.countOccurrences(roundedData)
+
+
 	return (
 		<div className='container mx-auto '>
 			{isSuccess && (
@@ -53,6 +62,9 @@ const Coinpage = () => {
 						days={days}
 						median={median}
 						difference={difference}
+						showChart={showChart}
+						finalData={finalData}
+						roundedData={roundedData}
 					/>
 				</div>
 			)}

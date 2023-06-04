@@ -1,4 +1,4 @@
-import { Line, Bar } from "react-chartjs-2";
+import { Bar, Line, Pie } from "react-chartjs-2";
 import s from './CoinChart.module.scss'
 import { options } from './ChartSettings';
 import { useGetChartDataQuery } from '../../store/coins/coins.api';
@@ -16,6 +16,7 @@ import {
 } from 'chart.js';
 import { Utils } from "../../utils/coin.utils";
 import { useAppSelector } from "../../hooks/hooks";
+import BarChart from './BarChart';
 
 ChartJS.register(CategoryScale, LinearScale,
 	PointElement,
@@ -31,18 +32,21 @@ const CoinChart: React.FC<ICoinChart> = ({ id, days }) => {
 
 	const { data, isSuccess } = useGetChartDataQuery({ id, days: days + '', })
 
-	let roundedData = isSuccess ? data.prices.map(item => item[1]) : []
+	let roundedData = isSuccess ? data.prices.map(item => Math.round(item[1])) : []
 
 	let forecastDateArray = Utils.createForecastDatesArray(forecastValue)
 
 	let forecastArray = [...roundedData.map((el, index) => index !== roundedData.length - 1 ? undefined : el), ...Utils.linearRegressionForecast(roundedData, forecastValue)]
 
+	let chartLabels = isSuccess ? [...Utils.createReverseDateArray(data.prices.map((item, index) => item && index)), ...forecastDateArray] : []
+
 	let chartData = {
-		labels: isSuccess ? [...Utils.createReverseDateArray(data.prices.map((item, index) => item && index)), ...forecastDateArray] : [],
+		labels: chartLabels,
 		datasets: [
 			{
 				label: `Изменение цены за ${days} дней`,
 				data: roundedData,
+				
 			},
 			{
 				label: `Линия тренда`,
@@ -58,12 +62,10 @@ const CoinChart: React.FC<ICoinChart> = ({ id, days }) => {
 			},
 		]
 	}
-
 	return (
 		<div>
 			<div className={s.chart}>
 				<Line data={chartData} options={options} />
-
 			</div>
 		</div>
 	);

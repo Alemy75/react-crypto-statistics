@@ -16,6 +16,8 @@ export interface coinsSlice {
     trendStatus: boolean
     forecastStatus: boolean
     difference: number
+    mode: number[]
+    discretRow: number[]
 }
 
 const initialState: coinsSlice = {
@@ -30,7 +32,9 @@ const initialState: coinsSlice = {
     pregrowthTemp: 0,
     trendStatus: false,
     forecastStatus: false,
-    difference: 0
+    difference: 0,
+    discretRow: [],
+    mode: []
 
 }
 
@@ -59,6 +63,9 @@ export const coinSlice = createSlice({
         },
         isTrend(state) {
             state.trendStatus = !state.trendStatus
+        },
+        setDiscretRow(state, action: PayloadAction<number[]>) {
+            state.discretRow = action.payload
         },
     },
 })
