@@ -20,7 +20,6 @@ interface IProps {
 }
 
 const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean, variance, days, median, difference, finalData, showChart, roundedData }) => {
-	const [showVariance, setShowVariance] = useState(false)
 	const [showTable, setShowTable] = useState(false)
 
 	let mode = Utils.calculateMode(roundedData)
@@ -62,8 +61,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Объем совокупности:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://studfile.net/html/2706/745/html_wycoi0re4I.nJRU/img-G7pJH7.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{roundedData.length - 1}
 						</span>
 					</div>
@@ -89,85 +87,75 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Cумма частот:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://studfile.net/html/2706/745/html_wycoi0re4I.nJRU/img-G7pJH7.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{roundedData.length - 1}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Дисперсия:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://studfile.net/html/2706/745/html_wycoi0re4I.nJRU/img-G7pJH7.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
+							
 							{variance}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Среднее арифметическое:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://excel2.ru/sites/default/files/pic_node/Statistica/stat-19.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
+							
 							{mean}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Медиана:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://www.univer-nn.ru/statistics/mediana.jpg" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{median}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Мода:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://www.univer-nn.ru/statistics/mediana.jpg" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{mode.length === 1 ? mode[0] : mode.join(', ')}
 						</span>
 					</div>	
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Размах вариаций:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{difference}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Среднее линейное отклонение:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Utils.calculateStandardDeviation(roundedData)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Среднее квадратическое отклонение:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[50px] inline mr-[100px]' src="https://studfile.net/html/2706/745/html_wycoi0re4I.nJRU/img-G7pJH7.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Math.pow(variance, 2)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Коэффициент вариации:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Utils.calculateCoefficientOfVariation(roundedData)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Коэффициент распределения Пирсона:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Utils.calculateSkewness(roundedData)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Скошенность ряда:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Utils.determineSkewness(Utils.calculateSkewness(roundedData))}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Скошенность ряда:</h3>
-						<span title='Показать формулы' onClick={() => setShowVariance(prev => !prev)} className='font-blue cursor-pointer'>
-							{showVariance && <span className='text-black'><img className='h-[30px] inline mr-[100px]' src="https://studfile.net/html/2706/1073/html_SKjk9_4Dct.RP3X/img-y_FC2x.png" alt="" /></span>}
+						<span className='font-blue cursor-pointer'>
 							{Utils.determineKurtosisSignificance(Utils.calculateKurtosis(roundedData))}
 						</span>
 					</div>
