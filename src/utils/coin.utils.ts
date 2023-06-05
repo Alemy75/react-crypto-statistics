@@ -57,7 +57,7 @@ export const Utils = {
 		const endPoint = inputArray[inputArray.length - 1];
 		const slope = (endPoint - startPoint) / (inputArray.length - 1);
 
-		const yValues = inputArray.map((value, index) => {
+		const yValues = inputArray.map((_, index) => {
 			return startPoint + slope * index;
 		});
 

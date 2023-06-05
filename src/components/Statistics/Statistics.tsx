@@ -29,7 +29,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 			<h2>О монете</h2>
 			<ul>
 				<li>
-					<h3 className='mb-4 mt-4 pb-[0.5em]'>Характеристики монеты <span className='font-blue'>за последние {days = 730} дней</span>:</h3>
+					<h3 className='mb-4 mt-4 pb-[0.5em]'>Характеристики монеты <span className='font-blue'>за последние {days} дней</span>:</h3>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Наименование:</h3>
 						<span className='font-blue'>{name}</span>
@@ -52,7 +52,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 				</li>
 				<GrowthTable />
 				<li>
-					<h3 className='mb-4 mt-6 pb-[0.5em]'>Рассет и отображение частотности:</h3>
+					<h3 className='mb-4 mt-6 pb-[0.5em]'>Расчет и отображение частотности:</h3>
 					{showChart && <BarChart finalData={finalData} />}
 
 					<div className="mt-6 pb-6 mb-4 flex justify-between text-justify border-b border-b-slate-100">
@@ -154,7 +154,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Скошенность ряда:</h3>
+						<h3>Степень существенности ассиметрии:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.determineKurtosisSignificance(Utils.calculateKurtosis(roundedData))}
 						</span>

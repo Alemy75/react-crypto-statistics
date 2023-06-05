@@ -1,4 +1,4 @@
-import { Bar, Line, Pie } from "react-chartjs-2";
+import {Line} from "react-chartjs-2";
 import s from './CoinChart.module.scss'
 import { options } from './ChartSettings';
 import { useGetChartDataQuery } from '../../store/coins/coins.api';
@@ -16,7 +16,6 @@ import {
 } from 'chart.js';
 import { Utils } from "../../utils/coin.utils";
 import { useAppSelector } from "../../hooks/hooks";
-import BarChart from './BarChart';
 
 ChartJS.register(CategoryScale, LinearScale,
 	PointElement,
