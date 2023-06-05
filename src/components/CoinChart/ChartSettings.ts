@@ -16,7 +16,11 @@ export const options = {
 			radius: 0
 		}
 	},
-	grid: {
-		color: "rgb(241, 245, 249)",
-	}
+	scales: {
+		x: {
+			ticks: {
+				maxTicksLimit: 10, // Ограничение количества меток по оси X
+			},
+		},
+	},
 };

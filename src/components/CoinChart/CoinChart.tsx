@@ -59,7 +59,7 @@ const CoinChart: React.FC<ICoinChart> = ({ id, days }) => {
 				borderColor: '#D62676',
 				backgroundColor: '#D6267650',
 			},
-		]
+		],
 	}
 	return (
 		<div>

@@ -26,6 +26,13 @@ export const options = {
 			position: 'top' as const,
 		},
 	},
+	scales: {
+		x: {
+		  ticks: {
+			maxTicksLimit: 30, // Ограничение количества меток по оси X
+		  },
+		},
+	  },
 };
 
 interface Props {

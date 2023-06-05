@@ -8,8 +8,6 @@ interface IProps {
 	current_price: number
 	last_updated: string
 	mean: number
-	min: number
-	max: number
 	variance: number
 	days: number
 	median: number
@@ -57,7 +55,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 
 					<div className="mt-6 pb-6 mb-4 flex justify-between text-justify border-b border-b-slate-100">
 						<h3 className='mb-4 pb-[0.5em] w-[20%]'>Все варианты ряда: <div className='mt-4'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
-						<div className={showTable ? "w-[70%] style-2" : "w-[70%] style-2 h-[200px]"}>{roundedData.sort((a,b) => a - b).join(', ')}</div>
+						<div className={showTable ? "px-4 py-4 tableshadow w-[70%] style-2" : "px-4 py-4 tableshadow w-[70%] style-2 h-[200px]"}>{roundedData.sort((a,b) => a - b).join(', ')}</div>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
 						<h3>Объем совокупности:</h3>
@@ -68,7 +66,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 					<div className="mt-6 mb-4 flex justify-between text-justify border-b border-b-slate-100">
 						<h3 className='mb-4 pb-[0.5em] w-[20%]'>Частота ряда: <div className='mt-4'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
 						{/* <div className='w-[70%]'>{finalData.join(', ')}</div> */}
-						<div className={showTable ? "w-[70%] style-2" : "w-[70%] style-2 h-[200px]"}>
+						<div className={showTable ? "tableshadow mb-6 w-[70%] style-2" : "tableshadow mb-6 w-[70%] style-2 h-[200px]"}>
 							<table className='iksweb'>
 								<tbody>
 									<tr>

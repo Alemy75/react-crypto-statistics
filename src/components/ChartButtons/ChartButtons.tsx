@@ -13,7 +13,7 @@ const ChartButtons: React.FC<IChartButtonProps> = ({ onClick }) => {
 	const { trendStatus, forecastStatus } = useAppSelector(state => state.coins)
 
 	return (
-		<>
+		<div className='mt-2'>
 			<div className='flex w-[100%] justify-between items-center'>
 				<div>
 					<button className='mr-4 text-center' onClick={() => setForecastValue(Number(inputValue))}>Спрогнозировать на:</button>
@@ -33,7 +33,7 @@ const ChartButtons: React.FC<IChartButtonProps> = ({ onClick }) => {
 					</span>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 
