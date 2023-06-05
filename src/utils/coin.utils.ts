@@ -180,7 +180,7 @@ export const Utils = {
 		let sum = arr.reduce((acc, num) => acc + num, 0);
 		return sum / arr.length;
 	},
-	// Рассчет среднего линейное отклонение: 
+	// Рассчет среднего квадратического отклонения: 
 	calculateStandardDeviation(arr: number[]) {
 		let mean = Utils.calculateMean(arr);
 		let deviations = arr.map(num => num - mean);

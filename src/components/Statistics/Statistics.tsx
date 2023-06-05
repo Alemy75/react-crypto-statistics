@@ -54,17 +54,17 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 					{showChart && <BarChart finalData={finalData} />}
 
 					<div className="mt-6 pb-6 mb-4 flex justify-between text-justify border-b border-b-slate-100">
-						<h3 className='mb-4 pb-[0.5em] w-[20%]'>Все варианты ряда: <div className='mt-4'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
+						<h3 className='mb-4 pb-[0.5em] w-[20%]'>Все варианты ряда: <div className='mt-4 cursor-pointer'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
 						<div className={showTable ? "px-4 py-4 tableshadow w-[70%] style-2" : "px-4 py-4 tableshadow w-[70%] style-2 h-[200px]"}>{roundedData.sort((a,b) => a - b).join(', ')}</div>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Объем совокупности:</h3>
+						<h3 className="cursor-pointer" title="Объём совокупности – это количество объектов в этой совокупности.">Объем совокупности:</h3>
 						<span className='font-blue cursor-pointer'>
 							{roundedData.length - 1}
 						</span>
 					</div>
 					<div className="mt-6 mb-4 flex justify-between text-justify border-b border-b-slate-100">
-						<h3 className='mb-4 pb-[0.5em] w-[20%]'>Частота ряда: <div className='mt-4'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
+						<h3 title='Частота ряда – это число повторений, сколько раз за какой-то период происходило некоторое событие, проявлялось определенное свойство объекта либо наблюдаемый параметр достигал данной величины' className='cursor-pointer mb-4 pb-[0.5em] w-[20%]'>Частота ряда: <div className='mt-4 cursor-pointer'>Отобразить все: <span className='font-blue' onClick={() => setShowTable(prev => !prev)}>{showTable ? "Вкл" : "Выкл"}</span></div></h3>
 						{/* <div className='w-[70%]'>{finalData.join(', ')}</div> */}
 						<div className={showTable ? "tableshadow mb-6 w-[70%] style-2" : "tableshadow mb-6 w-[70%] style-2 h-[200px]"}>
 							<table className='iksweb'>
@@ -84,75 +84,69 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 						</div>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Cумма частот:</h3>
+						<h3 title='Сумма всех частот определяет численность всей совокупности, её объём.' className="cursor-pointer">Cумма частот:</h3>
 						<span className='font-blue cursor-pointer'>
 							{roundedData.length - 1}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Дисперсия:</h3>
+						<h3 title='Дисперсия – это один из основных показателей в статистике. Он отражает меру разброса данных вокруг средней арифметической.' className="cursor-pointer">Дисперсия:</h3>
 						<span className='font-blue cursor-pointer'>
 							
 							{variance}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Среднее арифметическое:</h3>
+						<h3 title="Среднее арифметическое - число, равное сумме всех чисел множества, делённой на их количество." className="cursor-pointer">Среднее арифметическое:</h3>
 						<span className='font-blue cursor-pointer'>
 							
 							{mean}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Медиана:</h3>
+						<h3 title="Медиана - число, которое находится в середине ряда." className="cursor-pointer">Медиана:</h3>
 						<span className='font-blue cursor-pointer'>
 							{median}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Мода:</h3>
+						<h3 title="Мода — одно или несколько значений во множестве наблюдений, которое встречается наиболее часто." className="cursor-pointer">Мода:</h3>
 						<span className='font-blue cursor-pointer'>
 							{mode.length === 1 ? mode[0] : mode.join(', ')}
 						</span>
 					</div>	
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Размах вариаций:</h3>
+						<h3 title="Размах вариаций относится к разнице между максимальным и минимальным значениями в наборе данных." className="cursor-pointer">Размах вариаций:</h3>
 						<span className='font-blue cursor-pointer'>
 							{difference}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Среднее линейное отклонение:</h3>
+						<h3 title='Среднее квадратическое отклонение - среднее значение квадратов отклонений каждого элемента данных от среднего значения' className="cursor-pointer">Среднее квадратическое отклонение:</h3>
 						<span className='font-blue cursor-pointer'>
-							{Utils.calculateStandardDeviation(roundedData)}
+							{Math.sqrt(variance)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Среднее квадратическое отклонение:</h3>
-						<span className='font-blue cursor-pointer'>
-							{Math.pow(variance, 2)}
-						</span>
-					</div>
-					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Коэффициент вариации:</h3>
+						<h3 title='Коэффициент вариации — это величина, используемая в статистике, равная отношению стандартного (среднеквадратичного) отклонения случайной величины к ее среднему арифметическому. Он применяется для сравнения вариативности одного и того же признака в нескольких совокупностях с различным средним арифметическим.' className="cursor-pointer">Коэффициент вариации:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.calculateCoefficientOfVariation(roundedData)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Коэффициент распределения Пирсона:</h3>
+						<h3 title='Коэффициент распределения Пирсона - мера асимметрии распределения данных.' className="cursor-pointer">Коэффициент распределения Пирсона:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.calculateSkewness(roundedData)}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Скошенность ряда:</h3>
+						<h3 title='Скошенность ряда позволяет определить, насколько данные смещены влево или вправо относительно их среднего значения.' className="cursor-pointer">Скошенность ряда:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.determineSkewness(Utils.calculateSkewness(roundedData))}
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3>Степень существенности ассиметрии:</h3>
+						<h3 title='Степень существенности асимметрии относится к оценке, насколько значительна асимметрия в распределении данных.' className="cursor-pointer">Степень существенности ассиметрии:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.determineKurtosisSignificance(Utils.calculateKurtosis(roundedData))}
 						</span>

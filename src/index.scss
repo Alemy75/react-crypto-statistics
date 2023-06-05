@@ -175,6 +175,7 @@ table.iksweb1,
 table.iksweb1 td,
 table.iksweb1 th {
     border: 1px solid rgb(241 245 249);
+    
 }
 
 table.iksweb1 td,
@@ -182,12 +183,16 @@ table.iksweb1 th {
     padding: 3px;
     width: 30px;
     height: 35px;
+    &:hover {
+        background: #cccccc;
+    }
 }
 
 table.iksweb1 th {
     background: #347c99;
     color: #fff;
     font-weight: normal;
+    
 }
 
 .oscroll {
@@ -197,6 +202,11 @@ table.iksweb1 th {
 
 .style-2 {
     overflow-y: scroll;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
 }
 
 .style-2::-webkit-scrollbar-track {
