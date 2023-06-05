@@ -146,7 +146,7 @@ const Statistics: React.FC<IProps> = ({ name, current_price, last_updated, mean,
 						</span>
 					</div>
 					<div className="mb-4 flex justify-between items-center pb-[0.5em] border-b border-b-slate-100">
-						<h3 title='Степень существенности асимметрии относится к оценке, насколько значительна асимметрия в распределении данных.' className="cursor-pointer">Степень существенности ассиметрии:</h3>
+						<h3 title='Степень существенности асимметрии относится к оценке, насколько значительна асимметрия в распределении данных.' className="cursor-pointer">Степень существенности асимметрии:</h3>
 						<span className='font-blue cursor-pointer'>
 							{Utils.determineKurtosisSignificance(Utils.calculateKurtosis(roundedData))}
 						</span>
